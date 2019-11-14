@@ -35,3 +35,33 @@ This is My blog web app with Flask
     * Notes: for Migration to works there needs to be a path between the models.py and the application.py. So we do that in the views.py by imporing the model
     - from the terminal, issue a `flask db init` to create the migrations folder
     - then `flask db migrate` to create the DB
+
+5\. Test the model through shell
+---
+- Open a `flask shell`
+```
+>>> from author.models import Author
+>>> author = Author(full_name='John Smith', email='jsmith@example.com', password='myPassword')
+```
+- Trying to add the author in the DB `>>> db.session.add(author)` will result in the following error:
+    ``` Traceback (most recent call last):
+        File "<console>", line 1, in <module>
+        NameError: name 'db' is not defined
+    ```
+- import the 'db' object to interact with the Database
+    ```
+    >>> from application import db
+    >>> db.session.add(author)
+    >>> author.id
+    >>> db.session.commit()
+    >>> author.id
+    1
+    >>> Author.query.all()
+    [<Author: 'John Smith'>]
+    >>> db.session.delete(author)
+    >>> db.session.commit()
+    >>> Author.query.first()
+    >>> Author.query.all()
+    []
+    >>>
+    ```
