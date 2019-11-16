@@ -65,3 +65,21 @@ This is My blog web app with Flask
     []
     >>>
     ```
+
+6\. Create Registration Form
+---
+* Notes: Pain point with forms:
+    * Rendering the form on the page
+    * Validation of the Data
+    * Reloading fields
+    * Using the same form for editing
+
+* This process is more streamline wit Flask-WTF 
+
+- Create the `author/forms.py` file
+- update the `author/views.py` file 
+- create the `templates/author` folder for the templates under the root of directory
+- create the `templates/author/register.html` file
+    - remember to add `{{ form.hidden_tag }}` for CSRF (Cross-Site Request Forgery)
+        - CSRF are Security Features from WTForms and protect you from a known user forms posting to the server by generating a random token every time the form is rendered
+- Test by running `flask run`
