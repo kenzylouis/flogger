@@ -83,3 +83,13 @@ This is My blog web app with Flask
     - remember to add `{{ form.hidden_tag }}` for CSRF (Cross-Site Request Forgery)
         - CSRF are Security Features from WTForms and protect you from a known user forms posting to the server by generating a random token every time the form is rendered
 - Test by running `flask run`
+
+7\. Validate the form
+WTForms provide a method validate_on_submit when creating a form object
+- Use `validate_on_submit` to create error hints on the form itself
+- add `form.validate_on_submit()` after creating the form object
+- update the `register.html` to handle the error on the form
+- Use Macros, Allows us to create  re-usable HTML code that can work as a function. When we pass parameters something is retutned based on those parameters. 
+- As a practice you can prepend a macro template files with an _ ubderscore just to remind yourself they should not be used by themselves
+- create `templates/_formhelpers.html` 
+    - the `safe` in the `{{ field(**kwargs)|safe }}` tells the macro to not HTML escape the key-word arguments we are passing it, because it is not user intercode we are passing
