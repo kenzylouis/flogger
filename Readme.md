@@ -176,3 +176,13 @@ When login to a website or app, we need to set cookies so that other pages the l
 14\. Logout an Author user
 ---
 - in the `author/views.py` remove the session information an redirect to the login pages
+
+15\. Improve communication with user: Flask Flash Messages
+---
+They are special type of notifications allowing users to consume them and automatically desappear after consumption
+- Create a Macro to create messages in a nice wrapper
+    - create templates/_flashmessages.html
+        - the {% with ... %} {% endwith %} block makes the variables messages availabe only within the block
+        - if there is any flash messages we loop through them and display them with the help of a boostrap UI
+- Use the Macro in the `templates/author/login.html` with an `include` keyword.
+- Update the `author/views.py` file, import flash from flask, update register and logout to use `flash`
