@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash
 
 from application import db
 from author.models import Author
-from author.forms import RegisterForm
+from author.forms import RegisterForm, LoginForm
 
 author_app = Blueprint('author_app', __name__)
 
@@ -22,3 +22,13 @@ def register():
         db.session.commit()
         return f'Author ID: {author.id}'
     return render_template('author/register.html', form=form)
+
+@author_app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    error = None
+
+    if form.validate_on_submit():
+        return 'Logged in'
+
+    return render_template('author/login.html', form=form, error=error)

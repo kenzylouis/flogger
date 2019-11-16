@@ -150,3 +150,14 @@ a `->` indicates the next command that will be run, a `n` + `Enter` execute the 
 11\. Add custom error validation
 ---
 - Update `forms.py` and add a custom validation to test uniqueness of the email.
+
+12\. Add Login form
+---
+- Modify the `forms.py` and add a new class Login
+- in the `views.py` add a route to the `/login` URL
+- add a template in the `templates` folder for the login called `login.html`
+
+*  Add validation to the form:
+    *  Add validation for the `Login` class. This does not take any parameters as when we were validating the email because we are validating the whole form. It is a global validator
+        * First check if the form pass the normal validation with the `rv` object.
+        * when we return `False`, we mark the form as invalidated.
