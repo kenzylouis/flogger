@@ -7,7 +7,7 @@ from author.models import Author
 
 class LoginForm(FlaskForm):
     email = EmailField('Email Address', [validators.InputRequired(), validators.Email()])
-    password = PasswordField('New Password', [
+    password = PasswordField('Password', [
             validators.Required(),
             validators.Length(min=8, max=80)
     ])

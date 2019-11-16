@@ -172,3 +172,7 @@ When login to a website or app, we need to set cookies so that other pages the l
     - url_for to handle urls redirections
 
 - to check if the cookies were pass, update the blog `views.py`, add the session and get the info that was passed from author
+
+14\. Logout an Author user
+---
+- in the `author/views.py` remove the session information an redirect to the login pages
