@@ -93,3 +93,35 @@ WTForms provide a method validate_on_submit when creating a form object
 - As a practice you can prepend a macro template files with an _ ubderscore just to remind yourself they should not be used by themselves
 - create `templates/_formhelpers.html` 
     - the `safe` in the `{{ field(**kwargs)|safe }}` tells the macro to not HTML escape the key-word arguments we are passing it, because it is not user intercode we are passing
+
+8\. Add Style to our app
+- go to [Bootstrap] (https://getbootstrap.com/) and add the style and the javascript scripts in our `base.html` file.
+
+9\. Process the data from the form
+- Update the `views.py` and add logic to send the data to the database
+- Once you submit a new user, use `flask shell` to query the DB
+```
+>>> from author.models import Author
+>>> Author.query.all()
+[<Author: 'Kenzy Louis'>]
+>>> author = Author.query.first()
+>>> author.__dict__
+{'_sa_instance_state': <sqlalchemy.orm.state.InstanceState object at 0x10b548240>, 'id': 2, 'password': 'pbkdf2:sha256:150000$zzS1Gw26$d2650a41496821850d76b508a63e66bc3b5c29450d23dec3581594b9bde92ce9', 'full_name': 'Kenzy Louis', 'email': 'klouis@gmail.com'}
+>>>
+```
+- you can also check the database directly by issuing `mysql`
+```
+mysql -uflogger_user -pflogger_password
+mysql> show databases;
+mysql> use flogger;
+mysql> show tables;
+mysql> select * from author;
+|----|-------------|------------------|------------------------------------------------------------------------------------------------|
+| id | full_name   | email            | password                                                                                       |
+|----|-------------|------------------+------------------------------------------------------------------------------------------------|
+|  2 | Kenzy Louis | klouis@gmail.com | pbkdf2:sha256:150000$zzS1Gw26$d2650a41496821850d76b508a63e66bc3b5c29450d23dec3581594b9bde92ce9 |
+|----|-------------|------------------|------------------------------------------------------------------------------------------------|
+1 row in set (0.00 sec)
+mysql> \q
+Bye
+```
