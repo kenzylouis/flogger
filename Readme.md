@@ -85,6 +85,7 @@ This is My blog web app with Flask
 - Test by running `flask run`
 
 7\. Validate the form
+---
 WTForms provide a method validate_on_submit when creating a form object
 - Use `validate_on_submit` to create error hints on the form itself
 - add `form.validate_on_submit()` after creating the form object
@@ -95,9 +96,11 @@ WTForms provide a method validate_on_submit when creating a form object
     - the `safe` in the `{{ field(**kwargs)|safe }}` tells the macro to not HTML escape the key-word arguments we are passing it, because it is not user intercode we are passing
 
 8\. Add Style to our app
+---
 - go to [Bootstrap] (https://getbootstrap.com/) and add the style and the javascript scripts in our `base.html` file.
 
 9\. Process the data from the form
+---
 - Update the `views.py` and add logic to send the data to the database
 - Once you submit a new user, use `flask shell` to query the DB
 ```
@@ -127,6 +130,7 @@ Bye
 ```
 
 10\. Use PDB, the Python DeBugger
+---
 - in views.py under the if statement to `validate_on_submit` add:
 ```
 import pdb; pdb.set_trace()
@@ -142,3 +146,7 @@ a `->` indicates the next command that will be run, a `n` + `Enter` execute the 
 'Kenzy Louis'
 (Pdb) n
 ```
+
+11\. Add custom error validation
+---
+- Update `forms.py` and add a custom validation to test uniqueness of the email.
