@@ -125,3 +125,20 @@ mysql> select * from author;
 mysql> \q
 Bye
 ```
+
+10\. Use PDB, the Python DeBugger
+- in views.py under the if statement to `validate_on_submit` add:
+```
+import pdb; pdb.set_trace()
+```
+this will cause our application to halt and the following prompt will appear:
+a `->` indicates the next command that will be run, a `n` + `Enter` execute the next line of command
+```
+> /Users/klouis/projects/flogger/author/views.py(15)register()
+-> hashed_password = generate_password_hash(form.password.data)
+(Pdb) form.email.data
+'klouis@gmail.com'
+(Pdb) form.full_name.data
+'Kenzy Louis'
+(Pdb) n
+```
