@@ -161,3 +161,14 @@ a `->` indicates the next command that will be run, a `n` + `Enter` execute the 
     *  Add validation for the `Login` class. This does not take any parameters as when we were validating the email because we are validating the whole form. It is a global validator
         * First check if the form pass the normal validation with the `rv` object.
         * when we return `False`, we mark the form as invalidated.
+
+13\. Session for the Author user
+---
+When login to a website or app, we need to set cookies so that other pages the logged in user loads receive the user's info and prevents him from seeing pages he is not supposed to as well as keep out not logged in user.
+
+- in the views.py import from flask 
+    - redirect: to redirect to the blog page
+    - session: to manage session
+    - url_for to handle urls redirections
+
+- to check if the cookies were pass, update the blog `views.py`, add the session and get the info that was passed from author
