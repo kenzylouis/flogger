@@ -40,7 +40,7 @@ class RegisterForm(FlaskForm):
             validators.Length(min=8, max=80)
     ])
     confirm = PasswordField('Confirm Password', [
-            validators.EqualTo('password', message='Password must match'),
+            validators.EqualTo('password', message='Passwords must match'),
     ])
 
     def validate_email(self, email):

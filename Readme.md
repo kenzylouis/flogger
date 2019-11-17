@@ -186,3 +186,23 @@ They are special type of notifications allowing users to consume them and automa
         - if there is any flash messages we loop through them and display them with the help of a boostrap UI
 - Use the Macro in the `templates/author/login.html` with an `include` keyword.
 - Update the `author/views.py` file, import flash from flask, update register and logout to use `flash`
+
+16\. Add Unit testing for the Author app
+- Always add unit test for each feature of the app
+- Add the `utils/test_db.py` for a test DB
+    - Add `utils/__init__.py` so the module can be imported in other files
+- Add the test loader `tests.py` in the root of our project 
+- Create the `author/tests.py` file to test our Author app
+    - Create a class `AuthorTest`
+    - create a method `setUp()`
+        - to set up the test db,
+        - an app factory,
+        - a test app from the app factory that use the test db in its app_context
+        - this app_context is a app factory of test_client()
+    - create a `tearDown()` method
+        - `setUp()` and `tearDown()` are always created befor and after each test case respectively and they are mandatory
+    - Add a custom method to quickly create a user dictionary
+    - Add our first test case. It needs to start with `test_`
+    - We can enhance the test.
+        - if an author was created, check it in the database. Do that by by setting up a context to simulate the same thing  we do in the views.py
+            - we use the home page because we know our DB can be accessed at this point
