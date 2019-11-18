@@ -238,3 +238,28 @@ mysql>
         - else display a link to login
 - in the author/login template add a block to include the nav template
 - in the author/register template add a block to include the nav template
+
+19\. Add a model for the blog posts
+---
+- Create a folder under templates called `blog`
+- create an `index.html` under `blog`
+- update the index function in views.py for the blog app
+- create the `blog/models.py` class to handle our blog post model
+    - Create the post class method containing:
+        - id, tittle, body ...
+        - slug for pretty url 
+        - Create the init method, it takes an Author object as parameter
+        - always use utc in the models for the time
+        - use the `db.relationship` feature of the db instance of SQLAlchemy before the __init__. So instead of quering the DB each time we need an author or a category object, we load/attach them in the blog record with `db.relationship`
+            - so we can traverse a post.Author object and get for example `post.author.full_name` to get the author's name
+            - so you pass the actual `Author` class, not the table name, to the relationship method
+            - you also pass a back reference to the `posts` table
+            - so we will have on both Author and Category we will have a post property to get a list of posts an author wrote or how many posts a category contains
+                - this is the one-to-many relationship
+                - to know which model needs to have the relationship definition, always remember which table is the many side. For ex. one author can have many posts, so we put it on the posts model. a post cannot have more than one author (at least in these model)
+                - lazy='dynmaic' helps on how we load the related object in memory (in this case it is as needed and not the full object. just the property needed)
+
+    - Create the category class 
+        - it has a name
+    - Create the `__rep__` for both classes
+
