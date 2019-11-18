@@ -13,11 +13,11 @@ class Post(db.Model):
     live = db.Column(db.Boolean)
 
     author = db.relationship('Author',
-        backref=db.backref('posts'), lazy='dynamic'
+        backref=db.backref('posts', lazy='dynamic')
     )
 
     category = db.relationship('Category',
-        backref=db.backref('posts'), lazy='dynamic'   
+        backref=db.backref('posts', lazy='dynamic')
     )
 
     def __init__(self, author, title, body, category=None,

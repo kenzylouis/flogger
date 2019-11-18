@@ -272,3 +272,14 @@ mysql>
     - A dropdown to select from existing category
     - a text field for new category
 
+21\. Add a template for the Blog
+---
+- create a `post.html` inside `templates/blog`, use the macro helper to render the field that post method from the views.py will pass
+- Add a route to our post by creating the `post` method in the `blog/views.py`
+- We need to do a DB migration because we created the Post model
+    - run the following
+    ```
+    flask db migrate
+    flask db upgrade
+    ```
+

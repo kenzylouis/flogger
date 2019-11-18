@@ -10,7 +10,7 @@ def categories():
 class PostForm(FlaskForm):
     title = StringField('Title', [
         validators.InputRequired(),
-        validators.Lenght(max=80)
+        validators.Length(max=80)
     ])
     body = TextAreaField('Content', validators=[validators.InputRequired()])
     # this is for a dropdown menu 
