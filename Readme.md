@@ -263,3 +263,12 @@ mysql>
         - it has a name
     - Create the `__rep__` for both classes
 
+20\. Add the form for Blog
+---
+- create a `forms.py` under the blog app folder
+- it should contain:
+    - A title
+    - A text area for the content
+    - A dropdown to select from existing category
+    - a text field for new category
+
