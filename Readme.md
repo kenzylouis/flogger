@@ -228,3 +228,13 @@ mysql> SHOW FULL PROCESSLIST;
 
 mysql>
 ```
+
+18\. Add Nav bar to the app
+---
+- under templates create `nav.html`
+    - we do not have to use bootstrap.
+    - the most important thing use a if statement to control:
+        - if user is logged in (session is set), display the name and a link to logout
+        - else display a link to login
+- in the author/login template add a block to include the nav template
+- in the author/register template add a block to include the nav template
