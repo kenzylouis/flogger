@@ -29,7 +29,7 @@ class LoginForm(FlaskForm):
         else:
             self.password.errors.append("Incorrect email or password")
 
-        return super().validate()
+        return False
 
 
 class RegisterForm(FlaskForm):

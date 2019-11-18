@@ -188,6 +188,7 @@ They are special type of notifications allowing users to consume them and automa
 - Update the `author/views.py` file, import flash from flask, update register and logout to use `flash`
 
 16\. Add Unit testing for the Author app
+---
 - Always add unit test for each feature of the app
 - Add the `utils/test_db.py` for a test DB
     - Add `utils/__init__.py` so the module can be imported in other files
@@ -206,3 +207,24 @@ They are special type of notifications allowing users to consume them and automa
     - We can enhance the test.
         - if an author was created, check it in the database. Do that by by setting up a context to simulate the same thing  we do in the views.py
             - we use the home page because we know our DB can be accessed at this point
+
+17.\ Add unit test for login in the Author app
+---
+The DB was hanged, before I restarted, I got to do the following commands in the DB:
+```mysql> show engine innodb status;``` and  ```mysql> SHOW FULL PROCESSLIST;```
+
+```
+mysql> SHOW FULL PROCESSLIST;
+|-----|-----------------|-----------------|--------------|---------|--------|---------------------------------|-----------------------|
+| Id  | User            | Host            | db           | Command | Time   | State                           | Info                  |
+|-----|-----------------|-----------------|--------------|---------|--------|---------------------------------|-----------------------|
+|   4 | event_scheduler | localhost       | NULL         | Daemon  | 649873 | Waiting on empty queue          | NULL                  |
+| 173 | flogger_user    | localhost:59867 | NULL         | Sleep   |    585 |                                 | NULL                  |
+| 174 | flogger_user    | localhost:59869 | flogger_test | Sleep   |    585 |                                 | NULL                  |
+| 175 | flogger_user    | localhost:59870 | flogger_test | Query   |    585 | Waiting for table metadata lock | DROP TABLE author     |
+| 178 | root            | localhost       | flogger_test | Query   |      0 | starting                        | SHOW FULL PROCESSLIST |
+|-----|-----------------|-----------------|--------------|---------|--------|---------------------------------|-----------------------|
+5 rows in set (0.00 sec)
+
+mysql>
+```

@@ -64,4 +64,27 @@ class AuthorTest(unittest.TestCase):
             follow_redirects=True)
         assert 'Passwords must match' in str(rv.data)
 
+    def test_user_login(self):
+        rv = self.app.post('/register', data=self.user_dict())
+
+        with self.app as c:
+            rv = c.post('/login', data=self.user_dict(),
+                follow_redirects=True)
+            assert session['id'] == 1
+
+        with self.app as c:
+            rv = c.get('/logout', follow_redirects=True)
+            assert session.get('id') is None
+
+        user2 = self.user_dict()
+        user2['password'] = 'test4567'
+        rv = self.app.post('/login', data=user2, 
+            follow_redirects=True)
+        assert 'Incorrect email or password' in str(rv.data)
+
+        user3 = self.user_dict()
+        user3['email'] = 'noone@example.com'
+        rv = self.app.post('/login', data=user3,
+            follow_redirects=True)
+        assert 'Incorrect email or password' in str(rv.data)
     
