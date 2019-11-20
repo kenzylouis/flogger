@@ -283,3 +283,28 @@ mysql>
     flask db upgrade
     ```
 
+22\. Add Logic to capture blog post into the DB
+---
+- update the blog views and add logic after `validate_on_submit`
+- for new_category:
+    - we need to save the category for the post model needs a category.id, but since this is a new category, it does not exists yet and does not have an id
+    - we can temporary save the transaction in memory with a `db.session.flush`
+    - then save the category
+- if no new category just get the one the user selected from the drop down menu
+- strip both title and body for any preceding or trailing spaces
+- then create the post object and pass it to our db session to commit it to the DB
+- generate a url for the blog using a slug
+- after running a test:
+    - you can check the record from the DB
+        - use mysql directly 
+        ```
+        mysql -u root
+        mysql> use flogger
+        mysql> select * from post \G
+        ```
+        - Or you can check the flask shell
+        ```
+        flask shell
+        >>> from blog.models import Post
+        >>> Post.query.fist().__dict__
+        ```
