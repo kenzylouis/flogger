@@ -321,3 +321,11 @@ mysql>
 - modify the `login` method under `author/views.py` to handle user being redirected back and forth
     - verify if there is a next entry (a url) in the session dictionary, if redirect to that url, then pop it out of the dictionary
 - modify our `log/views.py` to include our decorator
+
+24\. Work on the blog Articles using Markdown
+---
+- create a template under `blog` called `article.html`
+    - for the body of our post we use a jinja modifier (`...|markdown`) to apply markdown rendering to our blog
+- modify `application.py` to import the flask Mardown module and apply it to our app
+- Add a route on the blog/views.py for our article method
+    -  Also add a redirect to the article under the post method
