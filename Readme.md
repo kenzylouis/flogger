@@ -308,3 +308,16 @@ mysql>
         >>> from blog.models import Post
         >>> Post.query.fist().__dict__
         ```
+
+23\. Add Login Decorator
+---
+- To Restrict specific routes unless specific conditions are met, use decorator
+-  Decorators are software design pattern: it is basically wrapping a function in another function, therefore expanding it without modifying the inner function internal structure
+- make the `/post` route available only if an author is logged in
+- under `author` app folder create `decorators.py`
+    - Import `wraps` to keep the name of the function being decorated
+    - import session to easyly check if there is a session
+    - import request from flask so that after redirecting users to the login page, they can return to where they were
+- modify the `login` method under `author/views.py` to handle user being redirected back and forth
+    - verify if there is a next entry (a url) in the session dictionary, if redirect to that url, then pop it out of the dictionary
+- modify our `log/views.py` to include our decorator
