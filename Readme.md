@@ -329,3 +329,11 @@ mysql>
 - modify `application.py` to import the flask Mardown module and apply it to our app
 - Add a route on the blog/views.py for our article method
     -  Also add a redirect to the article under the post method
+
+25\. Add Unittests for Blog
+- under the blog app add `tests.py`
+- alwas create the `SetUp` and `TearDown` methods.
+- create test for:
+    - posting a blog without login
+    - register and login
+    - create the post
