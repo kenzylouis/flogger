@@ -53,12 +53,12 @@ class PostTest(unittest.TestCase):
     def test_blog_post_create(self):
         # Post without login
         rv = self.app.get('/post', follow_redirects=True)
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         assert 'Please login to continue'
 
         # Register and Login
         rv = self.app.post('/register', data=self.user_dict())
-        rv = self.app.podt('/login', data=self.user_dict())
+        rv = self.app.post('/login', data=self.user_dict())
 
         # post first post
         rv = self.app.post('/post', data=self.post_dict(),
