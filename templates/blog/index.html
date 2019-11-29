@@ -7,7 +7,35 @@
 {% block content %}
 
 <div class="row">
-    <div class="offser-md-2 col-md-8">
+    <div class="offser-md-2 col-md-8 pt-5">
+
+        {% include '_flashmessages.html' %}
+
+        <h4>Latest Posts</h4>
+
+        <div class="post-list">
+            {% for post in posts %}
+
+            <div class="row post-item pt-3">
+                <div class="col-md-9">
+                    <h5><a href="{{ url_for('blog_app.article', slug=post.slug) }}">{{ post.title }}</a></h5>
+                    <div class="post-body">
+                        {{ post.body[:220] }}
+                    </div>
+                    <div>
+                        Posted by {{ post.author.full_name }} on 
+                        {{ post.publish_date.strftime('%y-%m-%d') }}
+                        {% if post.category %}
+                            in {{ post.category.name }}
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+                
+            {% endfor %}
+
+        </div>
 
     </div>
 </div>

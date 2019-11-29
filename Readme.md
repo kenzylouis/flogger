@@ -337,3 +337,10 @@ mysql>
     - posting a blog without login
     - register and login
     - create the post
+
+    Note: had an issue with ```sys.path.append doesn't work with my flask <APP>/tests.py files```
+
+26\. Update the landing (home) page for the blog
+- update the `nav.html` template file to add a link to create new post
+- update `blog/index.html` file under template to loop through all the posts and display them on the home page
+- update the views.py for the blog home page, query all live posts, order them, then return it to the template
