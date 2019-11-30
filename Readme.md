@@ -369,3 +369,16 @@ mysql>
 - update the blog `views.py` and add steps to process the image under
     - Add a function to resize the image and do some math not to distort the image when it will be dispayed on the page
 - Add the image to the `index.html` and `article.html` templates
+
+29\. Add editing functionality to our blog app
+---
+- Instead of creating a template edit.html, use conditional in the post.html template for the action we want to perform
+- We get the slug of the post we want to edit, so we will pass post context to the template
+- update `views.py` and add the `action` variable
+    - add a new route for the edit
+        - fetch the post from DB
+        - use the PostForm class, but pass it a keyword argument `obj=post`, where post is the post we just fetch from the DB
+        - validate the form on submit, keep the original title and image, a use `populate_obj(post)` that Flask_WTF gives you to update matching records of the post object
+        - verify if image is changed and handle it like before
+        - verify if there is a new category and handle it as appropriate
+- update the `article.html` template and add an `edit` functionality

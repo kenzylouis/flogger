@@ -10,7 +10,7 @@ def categories():
 
 class PostForm(FlaskForm):
     image =  FileField('Image', validators=[
-        FileAllowed(['jpg', 'png'], 'We only accept JPG or PNG images')
+        FileAllowed(['jpg', 'jpeg', 'png'], 'We only accept JPG or PNG images')
         ])
     title = StringField('Title', [
         validators.InputRequired(),

@@ -80,13 +80,63 @@ def post():
         return redirect(url_for('.article', slug=slug))
 
     return render_template('blog/post.html',
-        form=form
+        form=form,
+        action='new'
     )
 
 @blog_app.route('/post/<slug>')
 def article(slug):
     post = Post.query.filter_by(slug=slug).first_or_404()
     return render_template('blog/article.html', post=post)
+
+@blog_app.route('/edit/<slug>', methods=('GET', 'POST'))
+@login_required
+def edit(slug):
+    post = Post.query.filter_by(slug=slug).first_or_404()
+    form = PostForm(obj=post)
+
+    if form.validate_on_submit():
+        original_image = post.image
+        original_title = post.title
+        form.populate_obj(post)
+
+
+        if form.image.data:
+            f = form.image.data
+            image_id = str(uuid.uuid4())
+            file_name = image_id + '.png'
+            file_path = os.path.join(
+                BLOG_POST_IMAGES_PATH, file_name
+            )
+            Image.open(f).save(file_path)
+
+            _image_resize(BLOG_POST_IMAGES_PATH, image_id, 600, 'lg')
+            _image_resize(BLOG_POST_IMAGES_PATH, image_id, 300, 'sm')
+            
+            post.image = image_id
+
+        else:
+            post.image = original_image
+
+        if form.new_category.data:
+            new_category = Category(form.new_category.data)
+            db.session.add(new_category)
+            db.session.flush()
+            category = new_category
+
+        if form.title.data != original_title:
+            post.slug = slugify(str(post.id) + '-' + form.title.data)
+
+        db.session.commit()
+        flash('Article edited')
+        return redirect(url_for('.article', slug=post.slug))
+
+    return render_template(
+        'blog/post.html',
+        form=form,
+        post=post,
+        action='edit'
+    )
 
 def _image_resize(original_file_path, image_id, image_base, extension):
     file_path = os.path.join(
