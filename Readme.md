@@ -382,3 +382,10 @@ mysql>
         - verify if image is changed and handle it like before
         - verify if there is a new category and handle it as appropriate
 - update the `article.html` template and add an `edit` functionality
+
+30\. Add delete post functionality to our post and test it
+---
+- We are not deleting the post for real, we just mark it as not live
+- update the `views.py`, add a route for delete
+    - set the live field to false in the DB
+- create the test for the update and delete post in the blog `tests.py` file
