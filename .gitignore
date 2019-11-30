@@ -5,3 +5,4 @@ __pycache__
 .flaskenv
 migrations
 .vscode/
+static/images/uploads

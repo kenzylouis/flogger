@@ -357,3 +357,15 @@ mysql>
         - takes 3 paramters: the `page` we are currently on, how many results per page we want (`POSTS_PER_PAGE`), display (or not) a 404 error if we are forced to a page that does not have any results -> if set to `False`, we do not really consider it an error.
 - update the `blog/index.html` template
     - add links to navigate through the different pages (old and new posts)
+
+28\. Add image upload function to our blog
+---
+- Update the `forms.py` and add a field for file called image. Import the necessary modules required for this.
+- update `blog/post.html` template and add html code to render the image on our blog form
+- update the `blog/model.py` and add a field (column) called image (to store the the name of the image)
+    - the name of the image is actually a uuid of length 36
+- We changed the DB model, we need to do a DB migration
+    - `flask db migrate` then `flask db upgrade`
+- update the blog `views.py` and add steps to process the image under
+    - Add a function to resize the image and do some math not to distort the image when it will be dispayed on the page
+- Add the image to the `index.html` and `article.html` templates
