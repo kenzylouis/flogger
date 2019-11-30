@@ -7,14 +7,14 @@
 {% block content %}
 
 <div class="row">
-    <div class="offser-md-2 col-md-8 pt-5">
+    <div class="offset-md-2 col-md-8 pt-5">
 
         {% include '_flashmessages.html' %}
 
         <h4>Latest Posts</h4>
 
         <div class="post-list">
-            {% for post in posts %}
+            {% for post in posts.items %}
 
             <div class="row post-item pt-3">
                 <div class="col-md-9">
@@ -38,5 +38,16 @@
         </div>
 
     </div>
+</div>
+<div class="row">
+    <div class="offset-md-2 col-md-8 pt-5">
+        {% if posts.has_prev %}
+            <a href="{{ url_for('blog_app.index', page=posts.prev_num) }}">&lt;&lt;Newer Posts</a>      
+        {% endif %}
+        {% if posts.has_next %}
+            <a href="{{ url_for('blog_app.index', page=posts.next_num) }}">Older Posts &gt;&gt;</a>
+        {% endif %}
+    </div>
+
 </div>
 {% endblock %}

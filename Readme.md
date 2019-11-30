@@ -331,6 +331,7 @@ mysql>
     -  Also add a redirect to the article under the post method
 
 25\. Add Unittests for Blog
+---
 - under the blog app add `tests.py`
 - alwas create the `SetUp` and `TearDown` methods.
 - create test for:
@@ -341,6 +342,18 @@ mysql>
     Note: had an issue with ```sys.path.append doesn't work with my flask <APP>/tests.py files```
 
 26\. Update the landing (home) page for the blog
+---
 - update the `nav.html` template file to add a link to create new post
 - update `blog/index.html` file under template to loop through all the posts and display them on the home page
 - update the views.py for the blog home page, query all live posts, order them, then return it to the template
+
+27\. Add pagination on the blog index page
+---
+- in the blog app `views.py` define a page variable that reads a page parameters passed to the route if there is None, it will assign 1 to it.
+    - this variable will let us know on which page of the result we are on.
+- use the `paginate` function in the sqlalchemy query (daisy-chain it to the existing query)
+    - the function `paginate` 
+        - truncates the results in set of pages
+        - takes 3 paramters: the `page` we are currently on, how many results per page we want (`POSTS_PER_PAGE`), display (or not) a 404 error if we are forced to a page that does not have any results -> if set to `False`, we do not really consider it an error.
+- update the `blog/index.html` template
+    - add links to navigate through the different pages (old and new posts)

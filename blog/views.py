@@ -1,4 +1,4 @@
-from flask import Blueprint, session, render_template, flash, redirect, url_for
+from flask import Blueprint, session, render_template, flash, redirect, url_for, request
 from slugify import slugify
 
 from application import db
@@ -10,13 +10,18 @@ from author.decorators import login_required
 # Create an instance of the blog blueprint
 blog_app = Blueprint('blog_app', __name__)
 
+# Numnber of post per page
+POSTS_PER_PAGE = 5
+
 # Create the default route for our app
 @blog_app.route('/')
 def index():
+    page = int(request.values.get('page', '1'))
     # posts = Post.query.filter_by(live=True)
     # posts_ordered = posts.order_by(Post.publish_date.desc())
     # return render_template('blog/index.html', posts=posts_ordered)
-    posts = Post.query.filter_by(live=True).order_by(Post.publish_date.desc())
+    posts = Post.query.filter_by(live=True).order_by(Post.publish_date.desc())\
+        .paginate(page, POSTS_PER_PAGE, False)
     return render_template('blog/index.html',
         posts=posts)
 
