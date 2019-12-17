@@ -47,7 +47,8 @@ class PostTest(unittest.TestCase):
         return dict(
             title='My Awesome Post',
             body='This is my awesome post content',
-            new_category='Tech'
+            new_category='Tech',
+            tags_field='flask, python'
         )
 
     def test_blog_post_create(self):
@@ -76,12 +77,14 @@ class PostTest(unittest.TestCase):
         # Edit the article
         post2 = self.post_dict()
         post2['title'] = 'My New Awesome Post'
+        post2['tags_field'] = 'django'
         rv = self.app.post('/edit/1-' + slugify(self.post_dict()['title']),
                 data=post2,
                 follow_redirects=True
             )
         assert 'Article edited' in str(rv.data)
         assert 'My New Awesome Post' in str(rv.data)
+        assert 'flask' not in str(rv.data)
 
         # Delete the article
         rv = self.app.get('/delete/1-' + slugify(post2['title']),

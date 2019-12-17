@@ -389,3 +389,26 @@ mysql>
 - update the `views.py`, add a route for delete
     - set the live field to false in the DB
 - create the test for the update and delete post in the blog `tests.py` file
+
+30\. Manage the tags to our blog
+---
+- Posts and Tags have a many-to-many relationship (bi-directional one-to-many relation)
+- Need to create a association table with 2 columns to save the post and the tag and the relationship will be the record on the table
+- in the `blog/models.py` file 
+    - create a class `Tag`
+    - At the begining of the file, after the import add a variable `tag_x_post`, 
+        - It is a table that holds both the tag ID and the post ID 
+        - it is not a column we add to the post, but a reference that tells SQLAlchemy how to get the tag related to the Post and vice versa
+    - add a DB relationship call `tags` to retrieve a list of tags, which has a `secondary` argument holding `tag_x_post`, and a `lazy` load of `subquery` to query the `tag_x_post` table, and a back reference to `posts` with a `lazy` of `dynamic` so don't query each post every time we need the post id
+- to mamipulate the tags, update `views.py` and add a variable `tags_field` under the post method, pass it also to the render template
+- update the `post.html` template and add html code for `tags_field`
+- need to add methods to load and save tag on submit, update the `views.py` and add a couple of functions to do that
+- remember to do a `flask db migrate` and a `flask db upgrade` to apply the changes to the DB
+- When creating a post at this stage with multiple tags, we cannot see them yet
+- update `article.html` template
+- Give the ability to modify the tags on the post
+    - on the `views.py`  add the `_load_tags_field()` function that takes a post as a parameter
+    - on the `edit` route, add the `tags_fields`
+    - add `_save_tags`
+    - pass `tags_field` to the return to render the template
+- Update the test to include some tags by default
