@@ -1,0 +1,8 @@
+venv
+.env
+__pycache__
+*.pyc
+.flaskenv
+migrations
+.vscode/
+static/images/uploads
